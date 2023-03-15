@@ -2,24 +2,43 @@
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
 
 	public MainPage()
 	{
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
+    private void OnSearchClicked(object sender, EventArgs e)
+    {
+        var s = StudentRepository.GetStudentById(1);
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+        Title.Text = s.Name;
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+
+    }
+
+    private void OnAddStudentClicked(object sender, EventArgs e)
+    {
+        //need student data
+        Student s1 = new Student("Dana", "d@gmail.com");
+
+        //access the list
+        //Add to the list 
+        StudentRepository.addStudent(s1);
+        Title.Text = s1.Id.ToString();
+
+
+    }
+
+
+    private void OnStudentListClicked(object sender, EventArgs e)
+    {
+
+
+
+        DisplayAlert("StudentList BTN clicked", " See the entire list of student", "Ok");
+
+    }
 }
 
 
